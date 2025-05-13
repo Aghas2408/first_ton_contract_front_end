@@ -3,14 +3,13 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
     name: Build
-      runs=on: ubuntu-latest
-
-      steps:
+    runs=on: ubuntu-latest
+    steps:
         - name: Checkout repo
           uses: actions/checkout@v2
 
