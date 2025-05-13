@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useTonClient } from "./useTonClient";
 import { Address, type OpenedContract } from "ton-core";
 import { useAsyncInitialize } from "./useAsyncinitialize";
-import { Counter } from "../../contracts/Counter";
+import { MainContract } from "../../contracts/MainContract";
 
 export function useMainContract() {
     const client = useTonClient();
@@ -14,17 +14,17 @@ export function useMainContract() {
 
     const mainContract = useAsyncInitialize(async () => {
         if (!client) return;
-        const contract = new Counter(
+        const contract = new MainContract(
             Address.parse("EQCS7PUYXVFI-4uvP1_vZsMVqLDmzwuimhEPtsyQKIcdeNPu") // replace with your address from tutorial 2 step 8
         );
-        return client.open(contract) as OpenedContract<Counter>;
+        return client.open(contract) as OpenedContract<MainContract>;
     }, [client]);
 
     useEffect(() => {
         async function getValue() {
             if (!mainContract) return;
             setContractData(null);
-            const val = await mainContract.getCounter();
+            const val = await mainContract.getData();
             setContractData({
                 counter_value: val.number,
                 recent_sender: val.recent_sender,
