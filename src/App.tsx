@@ -6,9 +6,6 @@ function App() {
   const {
     contract_address,
     counter_value,
-    recent_sender,
-    owner_address,
-    contract_balance,
   } = useMainContract();
   return (
     <div>
@@ -20,7 +17,6 @@ function App() {
           <b>Our contract Address</b>
           <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
           <b>Our contract Balance</b>
-          <div className='Hint'>{contract_balance}</div>
         </div>
 
         <div className='Card'>
